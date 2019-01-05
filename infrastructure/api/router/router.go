@@ -2,10 +2,10 @@ package router
 
 import (
 	"github.com/labstack/echo"
-	"github.com/tshinowpub/go-echo-practice/infrastructure/api/handler"
+	"github.com/tshinowpub/go-echo-practice/provider"
 )
 
-func CreateRouter(e *echo.Echo) {
-	e.GET("/users", handler.CreateUserHandler().GetUsers)
-	e.POST("/users", handler.CreateUserHandler().CreateUser)
+func NewRouter(e *echo.Echo, provider provider.ServiceProvider) {
+	e.GET("/users", provider.BuildUserHandler().GetUsers)
+	e.POST("/users", provider.BuildUserHandler().CreateUser)
 }

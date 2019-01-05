@@ -4,9 +4,11 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
+	"github.com/tshinowpub/go-echo-practice/interface/controllers"
 )
 
 type userHandler struct {
+	userController controllers.UserController
 }
 
 type UserHandler interface {
@@ -14,8 +16,8 @@ type UserHandler interface {
 	CreateUser(c echo.Context) error
 }
 
-func CreateUserHandler() UserHandler {
-	return &userHandler{}
+func BuildUserHandler(uc controllers.UserController) UserHandler {
+	return &userHandler{userController: uc}
 }
 
 func (uh *userHandler) GetUsers(c echo.Context) error {
