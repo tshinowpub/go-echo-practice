@@ -13,6 +13,7 @@ type userHandler struct {
 
 type UserHandler interface {
 	GetUsers(c echo.Context) error
+	GetUser(c echo.Context) error
 	CreateUser(c echo.Context) error
 }
 
@@ -22,6 +23,16 @@ func BuildUserHandler(uc controllers.UserController) UserHandler {
 
 func (uh *userHandler) GetUsers(c echo.Context) error {
 	return c.JSON(http.StatusOK, "GetUsers")
+}
+
+func (uh *userHandler) GetUser(c echo.Context) error {
+
+	user, err := uh.userController.GetUser()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	return c.JSON(http.StatusOK, user)
 }
 
 func (uh *userHandler) CreateUser(c echo.Context) error {
