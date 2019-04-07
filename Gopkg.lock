@@ -37,6 +37,14 @@
   version = "v0.0.4"
 
 [[projects]]
+  digest = "1:5118c1bc3052170b37e50cb9028e956631d2172c0776be51162beb16cd1b87b1"
+  name = "github.com/uber-go/dig"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d100de9c8cc8358591507951141bc107713ba671"
+  version = "v1.3.0"
+
+[[projects]]
   digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
@@ -51,6 +59,14 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "dcecefd839c4193db0d35b88ec65b4c12d360ab0"
+
+[[projects]]
+  digest = "1:567c3029121b43ffd59b481dceafb0cc32fd9c1f7150c6bb02b795844f9ab15f"
+  name = "go.uber.org/dig"
+  packages = ["internal/digreflect"]
+  pruneopts = "UT"
+  revision = "7ff117f761a3f1b3eb521945c17a1091438eb6de"
+  version = "v1.7.0"
 
 [[projects]]
   branch = "master"
@@ -74,6 +90,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/labstack/echo"]
+  input-imports = [
+    "github.com/labstack/echo",
+    "github.com/uber-go/dig",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
