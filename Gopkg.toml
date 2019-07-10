@@ -34,5 +34,5 @@
   version = "3.3.8"
 
 [[constraint]]
-  name = "github.com/uber-go/dig"
-  version = "1.3.0"
+  name = "go.uber.org/dig"
+  version = "1.0.0"
