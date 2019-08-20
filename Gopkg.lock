@@ -37,6 +37,14 @@
   version = "v0.0.8"
 
 [[projects]]
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
+
+[[projects]]
   digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
@@ -121,6 +129,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/labstack/echo",
+    "github.com/pkg/errors",
     "go.uber.org/dig",
   ]
   solver-name = "gps-cdcl"

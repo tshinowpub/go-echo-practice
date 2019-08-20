@@ -7,26 +7,25 @@ import (
 	"github.com/tshinowpub/go-echo-practice/interface/controllers"
 )
 
-type userHandler struct {
-	userController controllers.UserController
+type UserHandler struct {
+	userController controllers.UserControllerInterface
 }
 
-type UserHandler interface {
+type UserHandlerInterface interface {
 	GetUsers(c echo.Context) error
 	GetUser(c echo.Context) error
 	CreateUser(c echo.Context) error
 }
 
-func BuildUserHandler(uc controllers.UserController) UserHandler {
-	return &userHandler{userController: uc}
+func NewUserHandler(userController controllers.UserControllerInterface) UserHandlerInterface {
+	return &UserHandler{userController}
 }
 
-func (uh *userHandler) GetUsers(c echo.Context) error {
+func (uh *UserHandler) GetUsers(c echo.Context) error {
 	return c.JSON(http.StatusOK, "GetUsers")
 }
 
-func (uh *userHandler) GetUser(c echo.Context) error {
-
+func (uh *UserHandler) GetUser(c echo.Context) error {
 	user, err := uh.userController.GetUser()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
@@ -35,6 +34,6 @@ func (uh *userHandler) GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-func (uh *userHandler) CreateUser(c echo.Context) error {
+func (uh *UserHandler) CreateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, "CreateUser")
 }

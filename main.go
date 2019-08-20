@@ -2,16 +2,16 @@ package main
 
 import (
 	"github.com/labstack/echo"
+	"github.com/tshinowpub/go-echo-practice/dependencyinjection"
 	"github.com/tshinowpub/go-echo-practice/infrastructure/api/router"
-	"github.com/tshinowpub/go-echo-practice/provider"
 )
 
 func main() {
 	e := echo.New()
 
-	provider := provider.Boot()
+	container, _ := dependencyinjection.New()
 
-	router.NewRouter(e, provider)
+	router.NewRouter(e, container)
 
 	e.Start(":8080")
 }
