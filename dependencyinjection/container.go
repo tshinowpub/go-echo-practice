@@ -2,7 +2,6 @@ package dependencyinjection
 
 import (
 	"github.com/pkg/errors"
-	"github.com/tshinowpub/go-echo-practice/infrastructure/api/handler"
 	"github.com/tshinowpub/go-echo-practice/interface/controllers"
 	"github.com/tshinowpub/go-echo-practice/usecase/usecases"
 	"go.uber.org/dig"
@@ -21,17 +20,11 @@ type Container interface {
 func New() (Container, error)  {
 	digContainer := dig.New()
 
-	if err := digContainer.Provide(func(getUser usecases.GetUser) controllers.UserControllerInterface {
-		return controllers.NewUserController(getUser)
-	}); err != nil {
-		return nil, errors.WithStack(err)
-	}
-
 	/**
-	 * Handlers
+	 * controllers
 	 */
-	if err := digContainer.Provide(func(userController controllers.UserControllerInterface) handler.UserHandlerInterface {
-		return handler.NewUserHandler(userController)
+	if err := digContainer.Provide(func(getUser usecases.GetUser) *controllers.UserController {
+		return controllers.NewUserController(getUser)
 	}); err != nil {
 		return nil, errors.WithStack(err)
 	}

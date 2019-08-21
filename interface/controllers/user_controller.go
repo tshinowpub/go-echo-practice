@@ -1,35 +1,32 @@
 package controllers
 
 import (
-	"github.com/tshinowpub/go-echo-practice/domain/entities"
+	"github.com/labstack/echo"
 	"github.com/tshinowpub/go-echo-practice/usecase/usecases"
+	"net/http"
 )
 
 type UserController struct {
 	getUser usecases.GetUser
 }
 
-type UserControllerInterface interface {
-	GetUsers()
-	GetUser() (*entities.User, error)
-	CreateUsers()
-}
-
-func NewUserController(getUser usecases.GetUser) UserControllerInterface {
+func NewUserController(getUser usecases.GetUser) *UserController {
 	return &UserController{getUser: getUser}
 }
 
-func (userController *UserController) GetUsers() {
+func (userController *UserController) GetUsers(c echo.Context) error {
+	return c.JSON(http.StatusOK, "GetUsers")
 }
 
-func (userController *UserController) GetUser() (*entities.User, error) {
+func (userController *UserController) GetUser(c echo.Context) error {
 	user, err := userController.getUser.Run()
 	if err != nil {
-		return nil, err
+		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	return user, err
+	return c.JSON(http.StatusOK, user)
 }
 
-func (userController *UserController) CreateUsers() {
+func (userController *UserController) CreateUser(c echo.Context) error {
+	return c.JSON(http.StatusOK, "CreateUser")
 }

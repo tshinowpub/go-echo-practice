@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/tshinowpub/go-echo-practice/dependencyinjection"
 	"github.com/tshinowpub/go-echo-practice/infrastructure/api/handler"
+	"github.com/tshinowpub/go-echo-practice/interface/controllers"
 	"go.uber.org/dig"
 )
 
@@ -15,13 +16,13 @@ type router struct {
 
 // NewRouter is call routing function
 func NewRouter(e *echo.Echo, container dependencyinjection.Container) {
-	var userHandler handler.UserHandlerInterface
-	_ = container.GetContainer().Invoke(func(handler handler.UserHandlerInterface) {
-		userHandler = handler
+	var userController controllers.UserController
+	_ = container.GetContainer().Invoke(func(controller controllers.UserController) {
+		userController = controller
 	})
 
-	e.GET("/users", userHandler.GetUsers)
+	e.GET("/users", userController.GetUsers)
 
-	e.GET("/users/1", userHandler.GetUser)
-	e.POST("/users", userHandler.CreateUser)
+	e.GET("/users/1", userController.GetUser)
+	e.POST("/users", userController.CreateUser)
 }
