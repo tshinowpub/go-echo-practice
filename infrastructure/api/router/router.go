@@ -3,15 +3,12 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/tshinowpub/go-echo-practice/dependencyinjection"
-	"github.com/tshinowpub/go-echo-practice/infrastructure/api/handler"
 	"github.com/tshinowpub/go-echo-practice/interface/controllers"
 	"go.uber.org/dig"
 )
 
 type router struct {
 	dig.In
-
-	userHandler handler.UserHandler
 }
 
 // NewRouter is call routing function
