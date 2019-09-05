@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  echo-practice-rds:
+    container_name: echo-practice-rds
+    image: mysql:5.7
+    volumes:
+      - ./persistance/rds/echo-practice/:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: echo_root
+      MYSQL_DATABASE: echo
+      MYSQL_USER: echo
+      MYSQL_PASSWORD: echo
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --sql_mode="STRICT_TRANS_TABLES"
+
+  echo-practice-rds-manager:
+    container_name: echo-practice-rds-manager
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - '8081:80'
+    depends_on:
+      - echo-practice-rds
+    environment:
+      PMA_HOSTS: echo-practice-rds
