@@ -25,3 +25,18 @@ services:
       - echo-practice-rds
     environment:
       PMA_HOSTS: echo-practice-rds
+
+  echo-practice-migration:
+    container_name: echo-practice-migration
+    build: ./migration
+    image: echo-practice-migration:latest
+    volumes:
+      - ../migrations/:/migrations
+    working_dir: /migrations
+    depends_on:
+      - echo-practice-rds
+    environment:
+      LANG: "ja_JP.UTF-8"
+      TZ: "Asia/Tokyo"
+      MIGRATE_ECHO: "mysql://echo:echo@tcp(echo-practice-rds:3306)/echo"
+    tty: true
